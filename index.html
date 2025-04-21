@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المكتبة الرقمية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles-css.css">
+</head>
+<body>
+    <!-- شاشة التحميل -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <p>جاري تحميل المكتبة...</p>
+    </div>
+
+    <!-- رأس الصفحة -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>المكتبة الرقمية</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" data-page="home">الرئيسية</a>
+                <a href="#" data-page="profile">الصفحة الشخصية</a>
+                <a href="#" data-page="favorites">المفضلة</a>
+                <a href="#" data-page="settings">الإعدادات</a>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-icon theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-menu" id="userMenu">
+                    <img src="/api/placeholder/40/40" alt="صورة المستخدم" class="profile-image" id="navProfileImage">
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="#" data-page="profile">الملف الشخصي</a>
+                        <a href="#" data-page="settings">الإعدادات</a>
+                        <a href="#" id="logoutBtn">تسجيل الخروج</a>
+                    </div>
+                </div>
+                <button class="btn login-btn" id="loginBtn" data-page="auth">تسجيل الدخول</button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#" data-page="home">الرئيسية</a>
+            <a href="#" data-page="profile">الصفحة الشخصية</a>
+            <a href="#" data-page="favorites">المفضلة</a>
+            <a href="#" data-page="settings">الإعدادات</a>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="container">
+        <!-- الصفحة الرئيسية -->
+        <section id="homePage" class="page active-page">
+            <div class="search-box">
+                <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن كتاب...">
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+
+            <div class="categories">
+                <button class="category-btn active" data-category="all">الكل</button>
+                <button class="category-btn" data-category="novels">روايات</button>
+                <button class="category-btn" data-category="science">علوم</button>
+                <button class="category-btn" data-category="history">تاريخ</button>
+                <button class="category-btn" data-category="selfDev">تطوير ذاتي</button>
+                <button class="category-btn" data-category="programming">برمجة</button>
+                <button class="category-btn" data-category="philosophy">فلسفة</button>
+            </div>
+
+            <div class="books-container" id="booksContainer">
+                <!-- ستتم إضافة الكتب هنا عبر JavaScript -->
+            </div>
+        </section>
+
+        <!-- صفحة تسجيل الدخول وإنشاء الحساب -->
+        <section id="authPage" class="page">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h2>مرحباً بك في المكتبة الرقمية</h2>
+                    <p>قم بتسجيل الدخول أو إنشاء حساب جديد للاستمتاع بالخدمات الكاملة</p>
+                </div>
+
+                <div class="auth-tabs">
+                    <div class="auth-tab active" data-tab="login">تسجيل الدخول</div>
+                    <div class="auth-tab" data-tab="register">إنشاء حساب</div>
+                </div>
+
+                <form id="loginForm" class="auth-form active">
+                    <div class="form-group">
+                        <label for="loginEmail" class="form-label">البريد الإلكتروني</label>
+                        <input type="email" id="loginEmail" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword" class="form-label">كلمة المرور</label>
+                        <input type="password" id="loginPassword" class="form-input" required>
+                    </div>
+
+                    <button type="submit" class="auth-btn">تسجيل الدخول</button>
+                </form>
+
+                <form id="registerForm" class="auth-form">
+                    <div class="image-upload">
+                        <img src="/api/placeholder/100/100" alt="صورة المستخدم" class="profile-preview" id="profilePreview">
+                        <label for="profileImage" class="file-input-label">اختر صورة</label>
+                        <input type="file" id="profileImage" class="file-input" accept="image/*">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerName" class="form-label">الاسم</label>
+                        <input type="text" id="registerName" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerEmail" class="form-label">البريد الإلكتروني</label>
+                        <input type="email" id="registerEmail" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerPassword" class="form-label">كلمة المرور</label>
+                        <input type="password" id="registerPassword" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerAge" class="form-label">العمر</label>
+                        <input type="number" id="registerAge" class="form-input" min="6" max="120" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerFavorites" class="form-label">أنواع الكتب المفضلة</label>
+                        <select id="registerFavorites" class="form-select" multiple>
+                            <option value="novels">روايات</option>
+                            <option value="science">علوم</option>
+                            <option value="history">تاريخ</option>
+                            <option value="selfDev">تطوير ذاتي</option>
+                            <option value="programming">برمجة</option>
+                            <option value="philosophy">فلسفة</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerBio" class="form-label">نبذة عنك</label>
+                        <textarea id="registerBio" class="form-input" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="auth-btn">إنشاء حساب</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- الصفحة الشخصية -->
+        <section id="profilePage" class="page">
+            <div class="profile-header">
+                <img src="/api/placeholder/150/150" alt="صورة المستخدم" class="profile-img-large" id="profilePageImage">
+                <div class="profile-details">
+                    <h2 class="profile-name" id="profileName">اسم المستخدم</h2>
+                    <p class="profile-info" id="profileInfo">العمر: 30 | البريد: user@example.com</p>
+                    <p class="profile-bio" id="profileBio">نبذة تعريفية عن المستخدم...</p>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <div class="stat-value" id="booksCount">0</div>
+                            <div class="stat-label">الكتب</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="favoritesCount">0</div>
+                            <div class="stat-label">المفضلة</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="readCount">0</div>
+                            <div class="stat-label">مقروءة</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-tabs">
+                <div class="profile-tab active" data-tab="myBooks">كتبي</div>
+                <div class="profile-tab" data-tab="reading">قيد القراءة</div>
+                <div class="profile-tab" data-tab="finished">منتهية</div>
+            </div>
+
+            <div id="myBooksTab" class="tab-content active">
+                <div class="books-container" id="myBooksContainer">
+                    <!-- ستتم إضافة الكتب هنا عبر JavaScript -->
+                </div>
+            </div>
+
+            <div id="readingTab" class="tab-content">
+                <div class="books-container" id="readingBooksContainer">
+                    <!-- ستتم إضافة الكتب هنا عبر JavaScript -->
+                </div>
+            </div>
+
+            <div id="finishedTab" class="tab-content">
+                <div class="books-container" id="finishedBooksContainer">
+                    <!-- ستتم إضافة الكتب هنا عبر JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- صفحة الإعدادات -->
+        <section id="settingsPage" class="page">
+            <div class="settings-container">
+                <div class="settings-section">
+                    <h3 class="settings-title">المعلومات الشخصية</h3>
+                    <form id="profileSettingsForm" class="settings-form">
+                        <div class="image-upload">
+                            <img src="/api/placeholder/100/100" alt="صورة المستخدم" class="profile-preview" id="settingsProfilePreview">
+                            <label for="settingsProfileImage" class="file-input-label">تغيير الصورة</label>
+                            <input type="file" id="settingsProfileImage" class="file-input" accept="image/*">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="settingsName" class="form-label">الاسم</label>
+                            <input type="text" id="settingsName" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="settingsEmail" class="form-label">البريد الإلكتروني</label>
+                            <input type="email" id="settingsEmail" class="form-input" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="settingsAge" class="form-label">العمر</label>
+                            <input type="number" id="settingsAge" class="form-input" min="6" max="120">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="settingsBio" class="form-label">نبذة عنك</label>
+                            <textarea id="settingsBio" class="form-input" rows="3"></textarea>
+                        </div>
+
+                        <button type="submit" class="save-btn">حفظ التغييرات</button>
+                    </form>
+                </div>
+
+                <div class="settings-section">
+                    <h3 class="settings-title">إضافة كتاب</h3>
+                    <form id="addBookForm" class="settings-form">
+                        <div class="image-upload">
+                            <img src="/api/placeholder/100/100" alt="غلاف الكتاب" class="book-cover-preview" id="bookCoverPreview">
+                            <label for="bookCover" class="file-input-label">اختر غلاف الكتاب</label>
+                            <input type="file" id="bookCover" class="file-input" accept="image/*">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bookTitle" class="form-label">عنوان الكتاب</label>
+                            <input type="text" id="bookTitle" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bookAuthor" class="form-label">المؤلف</label>
+                            <input type="text" id="bookAuthor" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bookCategory" class="form-label">التصنيف</label>
+                            <select id="bookCategory" class="form-select" required>
+                                <option value="novels">روايات</option>
+                                <option value="science">علوم</option>
+                                <option value="history">تاريخ</option>
+                                <option value="selfDev">تطوير ذاتي</option>
+                                <option value="programming">برمجة</option>
+                                <option value="philosophy">فلسفة</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bookDescription" class="form-label">وصف الكتاب</label>
+                            <textarea id="bookDescription" class="form-input" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bookFile" class="form-label">ملف الكتاب (PDF)</label>
+                            <label for="bookFile" class="file-input-label">اختر ملف PDF</label>
+                            <input type="file" id="bookFile" class="file-input" accept=".pdf" required>
+                            <div class="selected-file" id="selectedFile"></div>
+                        </div>
+
+                        <button type="submit" class="save-btn">إضافة الكتاب</button>
+                    </form>
+                </div>
+
+                <div class="settings-section">
+                    <h3 class="settings-title">إعدادات التطبيق</h3>
+                    <div class="toggle-container">
+                        <span class="toggle-label">الوضع الليلي</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="languageSelect" class="form-label">اللغة</label>
+                        <select id="languageSelect" class="language-select">
+                            <option value="ar" selected>العربية</option>
+                            <option value="en">الإنجليزية</option>
+                            <option value="fr">الفرنسية</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">السمة</label>
+                        <div class="theme-options">
+                            <div class="theme-option theme-blue active" data-theme="blue"></div>
+                            <div class="theme-option theme-green" data-theme="green"></div>
+                            <div class="theme-option theme-purple" data-theme="purple"></div>
+                            <div class="theme-option theme-orange" data-theme="orange"></div>
+                            <div class="theme-option theme-pink" data-theme="pink"></div>
+                            <div class="theme-option theme-teal" data-theme="teal"></div>
+                        </div>
+                    </div>
+
+                    <div class="toggle-container">
+                        <span class="toggle-label">حفظ تلقائي للتقدم</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="autoSaveToggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+
+                    <button id="saveAppSettings" class="save-btn">حفظ الإعدادات</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- صفحة المفضلة -->
+        <section id="favoritesPage" class="page">
+            <div class="favorites-header">
+                <h2>الكتب المفضلة</h2>
+            </div>
+
+            <div id="favoritesContainer" class="books-container">
+                <!-- ستتم إضافة الكتب المفضلة هنا عبر JavaScript -->
+            </div>
+
+            <div id="emptyFavorites" class="empty-state">
+                <div class="empty-icon">
+                    <i class="far fa-heart"></i>
+                </div>
+                <div class="empty-text">لا يوجد كتب في المفضلة</div>
+                <button class="btn" data-page="home">استعرض الكتب</button>
+            </div>
+        </section>
+
+        <!-- صفحة قراءة الكتب -->
+        <section id="readerPage" class="page">
+            <div class="reader-container">
+                <div class="reader-sidebar">
+                    <div class="reader-book-info">
+                        <img src="/api/placeholder/200/200" alt="غلاف الكتاب" class="sidebar-cover" id="readerBookCover">
+                        <h3 class="sidebar-title" id="readerBookTitle">عنوان الكتاب</h3>
+                        <p class="sidebar-author" id="readerBookAuthor">اسم المؤلف</p>
+                    </div>
+
+                    <div class="toc">
+                        <h4 class="toc-title">المحتويات</h4>
+                        <ul class="toc-list" id="tocList">
+                            <!-- ستتم إضافة العناوين هنا عبر JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="reader-main">
+                    <div class="reader-toolbar">
+                        <div class="toolbar-group">
+                            <button class="toolbar-btn" id="closeReaderBtn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <button class="toolbar-btn" id="sidebarToggle">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <button class="toolbar-btn" id="decreaseFontBtn">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button class="toolbar-btn" id="increaseFontBtn">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="toolbar-btn" id="nightModeBtn">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </div>
+
+                        <div class="page-counter">
+                            <button class="toolbar-btn" id="prevPageBtn">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <span class="counter-text">
+                                <span id="currentPage">1</span> / <span id="totalPages">1</span>
+                            </span>
+                            <button class="toolbar-btn" id="nextPageBtn">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                        </div>
+
+                        <div class="toolbar-group">
+                            <button class="toolbar-btn" id="shareBtn">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="toolbar-btn" id="favBtn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="toolbar-btn" id="searchTextBtn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="reader-content" id="readerContent">
+                        <div class="pdfViewer" id="pdfViewer">
+                            <!-- سيتم إضافة النصوص هنا -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>المكتبة الرقمية &copy; 2025 - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <!-- حاوية الإشعارات -->
+    <div class="toast-container" id="toastContainer">
+        <!-- ستتم إضافة الإشعارات هنا عبر JavaScript -->
+    </div>
+
+    <!-- مكتبة PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>
+      // تعيين مسار العامل
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    </script>
+
+    <!-- ملف JavaScript الرئيسي -->
+    <script src="script.js"></script>
+</body>
+</html>
